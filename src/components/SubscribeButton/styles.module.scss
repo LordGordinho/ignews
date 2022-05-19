@@ -1,0 +1,20 @@
+.subcribeButton{
+  height: 4rem;
+  width: 260px;
+  background-color: var(--yellow-500);
+  color: var(--gray-900);
+  border: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-radius: 2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: filter .2s;
+
+  &:hover {
+    filter: ;
+  }
+}
