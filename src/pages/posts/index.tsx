@@ -28,7 +28,7 @@ export default function Posts({ posts }: PostProps) {
         <div className={styles.posts}>
           {
             posts.map( post => (
-              <a href="#">
+              <a key={post.slug} href="#">
                 <time>{post.updatedAt}</time>
                 <strong>{post.title}</strong>
                 <p>{post.excerpt}</p>
@@ -45,7 +45,6 @@ export const  getStaticProps: GetStaticProps = async () => {
   const client = getPrismicClient()
 
   const response = await client.getAllByType('post-type')
-  console.log(response)
   const posts = response.map( post => {
     return {
       title: RichText.asText(post.data.tittle),

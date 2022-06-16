@@ -64,8 +64,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             const checkoutSession = event.data.object as Stripe.Checkout.Session;
 
             if(!checkoutSession.subscription?.toString() || !checkoutSession.customer?.toString()) throw new Error('Id Error')
-  
-            console.log(checkoutSession)
+
             await saveSubscription(
               checkoutSession.subscription.toString(),
               checkoutSession.customer.toString(),

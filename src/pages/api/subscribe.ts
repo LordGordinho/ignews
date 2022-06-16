@@ -32,8 +32,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const stripeCustomer = await stripe.customers.create({
         email: session?.user?.email ?? ""
       })
-  
-      console.log(stripeCustomer)
 
       await fauna.query(
         q.Update(
