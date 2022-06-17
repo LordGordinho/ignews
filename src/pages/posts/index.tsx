@@ -5,6 +5,7 @@ import { RichText } from 'prismic-dom';
 
 import Head from 'next/head';
 import styles from './styles.module.scss'
+import Link from 'next/link';
 
 type Post = {
   title: string,
@@ -28,11 +29,13 @@ export default function Posts({ posts }: PostProps) {
         <div className={styles.posts}>
           {
             posts.map( post => (
-              <a key={post.slug} href="#">
-                <time>{post.updatedAt}</time>
-                <strong>{post.title}</strong>
-                <p>{post.excerpt}</p>
-              </a>
+              <Link key={post.slug} href={`posts/${post.slug}`} passHref>
+                <a>
+                  <time>{post.updatedAt}</time>
+                  <strong>{post.title}</strong>
+                  <p>{post.excerpt}</p>
+                </a>
+              </Link>
             ))
           }
         </div>
