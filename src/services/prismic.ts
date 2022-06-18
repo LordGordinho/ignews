@@ -1,6 +1,6 @@
 import { createClient } from "@prismicio/client";
 
-export function getPrismicClient(req: unknown) {
+export function getPrismicClient(req?: unknown) {
   const client = createClient(
     "ignewsdevstaging2", 
     { 

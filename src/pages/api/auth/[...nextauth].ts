@@ -11,6 +11,42 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_SECRET
     })],
     callbacks: {
+      async session({ session, token, user }) {
+        try {
+          const userActiveSubscription = await fauna.query(
+            q.Get(
+              q.Intersection([
+                q.Match(
+                  q.Index('subscription_by_user_ref'),
+                  q.Select(
+                    'ref',
+                    q.Get(
+                      q.Match(
+                        q.Index('user_by_email'),
+                        q.Casefold(session.user?.email ?? "")
+                      )
+                    )
+                  )
+                ),
+                q.Match(
+                  q.Index('subscription_by_status'),
+                  'active'
+                )
+              ])
+            )
+          )
+
+          return {
+            ...session,
+            activeSubscription: userActiveSubscription
+          }
+        } catch {
+          return {
+            ...session,
+            activeSubscription: null
+          }
+        }
+      },
       async signIn({ user, account, profile, email, credentials }) {
         try {
           const email_query = user.email ?? ""

@@ -16,6 +16,10 @@ export function SubscribeButton({priceId}: SubscribeButton) {
       return;
     }
 
+    if(session?.activeSubscription){
+      return;
+    }
+
     try {
       const response = await api.post('/subscribe')
 
