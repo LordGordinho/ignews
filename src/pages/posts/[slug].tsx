@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
     return {
       redirect: {
         permanent: false,
-        destination: "/",
+        destination: `/posts/previews/${slug}`,
       }
     };
   }
